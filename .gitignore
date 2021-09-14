@@ -236,3 +236,6 @@ vbuild/
 
 # helm chart dependencies
 *.tgz
+
+# Docusaurus
+docs/site/node_modules*
