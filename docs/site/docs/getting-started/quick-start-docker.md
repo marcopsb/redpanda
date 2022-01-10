@@ -1,10 +1,12 @@
 ---
+title: Docker
+order: 0
 sidebar_position: 1
 ---
 
 # Docker Quick Start Guide
 
-Redpanda is a modern [streaming platform](https://vectorized.io/blog/intelligent-data-api/) for mission critical workloads.
+Redpanda is a modern [streaming platform](/blog/intelligent-data-api/) for mission critical workloads.
 With Redpanda you can get up and running with streaming quickly
 and be fully compatible with the [Kafka ecosystem](https://cwiki.apache.org/confluence/display/KAFKA/Ecosystem).
 
@@ -24,12 +26,13 @@ With a 1-node cluster you can test out a simple implementation of Redpanda.
 
 **_Notes_**:
 
-- `--overprovisioned` is used to accomodate docker resource limitations.
+- `--overprovisioned` is used to accommodate docker resource limitations.
 - `--pull=always` makes sure that you are always working with the latest version.
 
 ```bash
 docker run -d --pull=always --name=redpanda-1 --rm \
 -p 9092:9092 \
+-p 9644:9644 \
 docker.vectorized.io/vectorized/redpanda:latest \
 redpanda start \
 --overprovisioned \
@@ -40,8 +43,8 @@ redpanda start \
 --check=false
 ```
 
-You can do some [simple topic actions](#Do-some-streaming) to do some streaming.
-Otherwise, just point your [Kafka-compatible client](/docs/faq/#What-clients-do-you-recommend-to-use-with-Redpanda) to 127.0.0.1:9092.
+You can do some [simple topic actions](#do-some-streaming) to do some streaming.
+Otherwise, just point your [Kafka-compatible client](/docs/reference/faq#what-clients-do-you-recommend-to-use-with-redpanda) to 127.0.0.1:9092.
 
 ### Set up a 3-node cluster
 
@@ -72,6 +75,7 @@ docker run -d \
 --net=redpandanet \
 -p 8082:8082 \
 -p 9092:9092 \
+-p 9644:9644 \
 -v "redpanda1:/var/lib/redpanda/data" \
 docker.vectorized.io/vectorized/redpanda redpanda start \
 --smp 1  \
@@ -173,7 +177,7 @@ You can easily try out different docker configuration parameters with a docker-c
         - --advertise-kafka-addr
         - PLAINTEXT://redpanda:29092,OUTSIDE://localhost:9092
         # NOTE: Please use the latest version here!
-        image: docker.vectorized.io/vectorized/redpanda:v21.4.13
+        image: docker.vectorized.io/vectorized/redpanda:v21.9.5
         container_name: redpanda-1
         ports:
         - 9092:9092
@@ -206,7 +210,7 @@ Here are some sample commands to produce and consume streams:
     rpk topic produce twitch_chat --brokers=localhost:9092
     ```
 
-    Type text into the topic and press Ctrl + D to seperate between messages.
+    Type text into the topic and press Ctrl + D to separate between messages.
 
     Press Ctrl + C to exit the produce command.
 
@@ -232,7 +236,8 @@ You've just installed Redpanda and done streaming in a few easy steps.
 
 ## Clean Up
 
-When you are finished with the cluster, you can shutdown and delete the containers with:
+When you are finished with the cluster, you can shutdown and delete the containers.
+Change the commands below accordingly if you used the 1-cluster option, or the 3-cluster option.
 
 ```bash
 docker stop redpanda-1 redpanda-2 redpanda-3 && \
@@ -248,10 +253,9 @@ docker network rm redpandanet
 
 ## What's Next?
 
-- Our [FAQ](/docs/faq) page shows all of the clients that you can use to do streaming with Redpanda.
+- Our [FAQ](/docs/reference/faq) page shows all of the clients that you can use to do streaming with Redpanda.
     (Spoiler: Any Kafka-compatible client!)
 - Get a multi-node cluster up and running using [`rpk container`](/docs/deploy-self-hosted/guide-rpk-container).
-- Use the [Quick Start Docker Guide](/docs/getting-started/quick-start-docker) to try out Redpanda using Docker.
 - Want to setup a production cluster? Check out our [Production Deployment Guide](/docs/deploy-self-hosted/production-deployment).
 
 <img src="https://static.scarf.sh/a.png?x-pxid=3c187215-e862-4b67-8057-45aa9a779055" />

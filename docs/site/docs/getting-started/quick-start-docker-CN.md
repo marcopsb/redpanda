@@ -1,5 +1,6 @@
 ---
-sidebar_position: 9
+title: Docker快速入门指南
+sidebar_position: 2
 ---
 
 # Docker快速入门指南
@@ -39,8 +40,8 @@ redpanda start \
 --check=false
 ```
 
-您可以执行一些[简单的topic操作](#Do-some-streaming)来进行一些流式传输。
-或者，您只需将[Kafka兼容客户端](/docs/faq/#What-clients-do-you-recommend-to-use-with-Redpanda)指向到 `127.0.0.1:9092` 就可以了。
+您可以执行一些[简单的topic操作](#试一下streaming)来进行一些流式传输。
+或者，您只需将[Kafka兼容客户端](/docs/reference/faq/#what-clients-do-you-recommend-to-use-with-redpanda)指向到 `127.0.0.1:9092` 就可以了。
 
 ### 设置3节点cluster
 
@@ -247,7 +248,7 @@ docker network rm redpandanet
 
 ## 下一步
 
-- 我们的[FAQ](/docs/faq)页面显示了可用于与Redpanda进行流媒体传输的所有客户端。
+- 我们的[FAQ](/docs/reference/faq)页面显示了可用于与Redpanda进行流媒体传输的所有客户端。
     （剧透：任何与Kafka兼容的客户端！）
 - 使用[`rpk容器`](/docs/deploy-self-hosted/guide-rpk-container)启动并运行多节点cluster。
 - 使用[快速入门Docker指南](/docs/getting-started/quick-start-docker)基于Docker试用Redpanda。

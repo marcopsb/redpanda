@@ -23,7 +23,7 @@ const FeatureList = [
         After you see its power, put Redpanda to the real test in production.
       </>
     ),
-    url: '/',
+    url: '/docs/deploy-self-hosted/production-deployment',
   },
   {
     title: 'Deeper dive into Redpanda',
@@ -33,7 +33,7 @@ const FeatureList = [
         When you want to use the more advanced Redpanda features...
       </>
     ),
-    url: '/',
+    url: '/docs/features/index',
   },
 ];
 

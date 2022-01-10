@@ -1,9 +1,9 @@
 ---
-title: Intro to events and streaming
-sidebar_position: 2
+title: How events improve your app - An intro to events and streaming
+order: 0
 ---
 
-# How events improve your app: Intro to events and streaming
+# How events improve your app: An intro to events and streaming
 
 Components in distributed systems depend on each other for data and system updates,
 and in time-sensitive applications the updates need to happen as close to wire speed as possible.
@@ -33,9 +33,9 @@ This architecture helps developers to build systems that are fast and scalable.
 ## Event processing
 
 Some components of the distributed system produce events as a result of a specific action that is done in that component.
-These components are referred to as “producers”.
+These components are referred to as “producers."
 When producers send these events and the events are read or stored in sequence,
-these events represent a replayable log of changes in the system, also called a "stream".
+these events represent a replayable log of changes in the system, also called a "stream."
 
 A single event includes information that is required by one or many other components in the system, also known as “consumers”,
 to effect additional changes.

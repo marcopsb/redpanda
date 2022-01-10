@@ -1,4 +1,6 @@
 ---
+title: Frequently Asked Questions
+order: 0
 ---
 # Frequently Asked Questions
 
@@ -12,16 +14,14 @@ which we have tested with:
 | -------- | ------ | ---- |
 | Java | Apache Kafka Java Client | https://github.com/apache/kafka |
 | C/C++ | librdkafka | https://github.com/edenhill/librdkafka |
-| Go | Sarama | https://github.com/Shopify/sarama |
+| Go | franz-go | https://github.com/twmb/franz-go |
 | Python | kafka-python | https://pypi.org/project/kafka-python |
 | JS | KafkaJS | https://kafka.js.org |
 | PHP | php-simple-kafka-client | https://github.com/php-kafka/php-simple-kafka-client |
 
 ## Is Redpanda Fully Kafka API Compatible?
 
-We support all parts of the Kafka API except for the transactions API. We are
-working on adding this shortly and you can find the issue in our public
-github here, [Support the Kafka Transactions API](https://github.com/vectorizedio/redpanda/issues/445). 
+We support all parts of the Kafka API, including the transactions API that we added in [release 21.8.1](https://github.com/vectorizedio/redpanda/releases/tag/v21.8.1).
 
 If you run into any issues while working with a Kafka tool, please let us know! [File an issue](https://github.com/vectorizedio/redpanda/issues/new)
 

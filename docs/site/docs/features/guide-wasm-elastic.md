@@ -1,4 +1,5 @@
 ---
+order: 7
 ---
 
 # Transforming data with WebAssembly (Wasm)

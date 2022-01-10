@@ -1,10 +1,11 @@
 ---
-sidebar_position: 4
+title: MacOS
+order: 0
+sidebar_position: 6
 ---
-
 # MacOS Quick Start Guide
 
-Redpanda is a modern [streaming platform](https://vectorized.io/blog/intelligent-data-api/) for mission critical workloads.
+Redpanda is a modern [streaming platform](/blog/intelligent-data-api/) for mission critical workloads.
 With Redpanda you can get up and running with streaming quickly
 and be fully compatible with the [Kafka ecosystem](https://cwiki.apache.org/confluence/display/KAFKA/Ecosystem).
 
@@ -20,7 +21,7 @@ If you want to customize the containers, you can also set up your own [Redpanda 
 
 ### Installing rpk
 
-You can install `rpk` on MacOS from either with [Homebrew](https://brew.sh/) or you can just download the binary.
+You can install `rpk` on MacOS either with [Homebrew](https://brew.sh/) or you can just download the binary.
 
 - To install `rpk` with Homebrew, run: `brew install vectorizedio/tap/redpanda`
 - To download the `rpk` binary:
@@ -32,13 +33,26 @@ You can install `rpk` on MacOS from either with [Homebrew](https://brew.sh/) or 
 
 To run Redpanda in a 3-node cluster, run: `rpk container start -n 3`
 
-The first time you run `rpk`, it downloads the latest version of Redpanda.
+The first time you run `rpk container start`, it downloads an image matching the rpk version (you can check it by running `rpk version`).
 You now have a 3-node cluster running Redpanda!
+
+The command output shows the addresses of the cluster nodes:
+
+```
+$ rpk container start -n 3
+Downloading latest version of Redpanda
+Starting cluster
+Waiting for the cluster to be ready...
+  NODE ID  ADDRESS          
+  0        127.0.0.1:49462  
+  1        127.0.0.1:49468  
+  2        127.0.0.1:49467  
+```
 
 You can run `rpk` commands to interact with the cluster, for example:
 
 ```bash
-rpk cluster info
+rpk cluster info --brokers 127.0.0.1:49462,127.0.0.1:49468,127.0.0.1:49467
 ```
 
 ## Do some streaming
@@ -48,13 +62,13 @@ Here are the basic commands to produce and consume streams:
 1. Create a topic. We'll call it "twitch_chat":
 
     ```bash
-    rpk topic create twitch_chat
+    rpk topic create twitch_chat --brokers <broker1_address>,<broker2_address>...
     ```
 
 1. Produce messages to the topic:
 
     ```bash
-    rpk topic produce twitch_chat
+    rpk topic produce twitch_chat --brokers <broker1_address>,<broker2_address>...
     ```
 
     Type text into the topic and press Ctrl + D to seperate between messages.
@@ -64,7 +78,7 @@ Here are the basic commands to produce and consume streams:
 1. Consume (or read) the messages in the topic:
 
     ```bash
-    rpk topic consume twitch_chat
+    rpk topic consume twitch_chat --brokers <broker1_address>,<broker2_address>...
     ```
     
     Each message is shown with its metadata, like this:
@@ -90,7 +104,7 @@ rpk container purge
 
 ## What's Next?
 
-- Our [FAQ](/docs/faq) page shows all of the clients that you can use to do streaming with Redpanda.
+- Our [FAQ](/docs/reference/faq) page shows all of the clients that you can use to do streaming with Redpanda.
     (Spoiler: Any Kafka-compatible client!)
 - Use the [Quick Start Docker Guide](/docs/getting-started/quick-start-docker) to try out Redpanda using Docker.
 - Want to setup a production cluster? Check out our [Production Deployment Guide](/docs/deploy-self-hosted/production-deployment).

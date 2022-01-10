@@ -1,6 +1,8 @@
 ---
+title: Configuring Redpanda operator for connectivity
+order: 0
+sidebar_position: 1
 ---
-
 # Configuring Redpanda operator for connectivity
 
 The Redpanda operator supports configuration for internal and external connectivity.

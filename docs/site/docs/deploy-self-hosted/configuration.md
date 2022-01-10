@@ -1,6 +1,7 @@
 ---
 title: Custom configuration
 order: 5
+sidebar_position: 2
 ---
 # Custom configuration
 
@@ -35,7 +36,7 @@ redpanda:
   # Required.
   data_directory: "var/lib/redpanda/data"
     
-  # Unique id identifying the node in the cluster.
+  # Unique ID identifying the node in the cluster.
   # Required.
   node_id: 1
    
@@ -158,26 +159,13 @@ redpanda:
   # If the seed_server list is empty the node will be a cluster root and it will form a new cluster.
   # Default: []
   seed_servers:
-    - address: "0.0.0.0"
+    - host:
+      address: 192.168.0.1
       port: 33145
-  
-  # Number of partitions for the internal raft metadata topic.
-  # Default: 7
-  seed_server_meta_topic_partitions: 7
 
   # The raft leader heartbeat interval in milliseconds.
   # Default: 150
   raft_heartbeat_interval_ms: 150
-  
-  # Minimum redpanda version
-  min_version: 0
-  
-  # Maximum redpanda version
-  max_version: 1
-  
-  # Manage CPU scheduling.
-  # Default: false
-  use_scheduling_groups: false 
   
   # Default number of quota tracking windows.
   # Default: 10
@@ -252,8 +240,18 @@ redpanda:
   group_topic_partitions: 1
   
   # Default replication factor for new topics.
-  # Default: 1
+  # Default: 1 (In v21.8.1 and higher, the default is 3 for Kubernetes clusters with at least 3 nodes)
   default_topic_replications: 1
+
+  # Replication factor for a transaction coordinator topic.
+  # Not required
+  # Default: 1 (In v21.8.1 and higher, the default is 3 for Kubernetes clusters with at least 3 nodes)
+  transaction_coordinator_replication: 1
+
+  # Replication factor for an ID allocator topic.
+  # Not required
+  # Default: 1 (In v21.8.1 and higher, the default is 3 for Kubernetes clusters with at least 3 nodes)
+  id_allocator_replication: 1
   
   # Timeout (in milliseconds) to wait when creating a new topic.
   # Default: 2s
@@ -542,7 +540,7 @@ rpk:
     sasl:
       user: user
       password: pass
-      method: scram-sha256
+      type: SCRAM-SHA-256
 
   # The Admin API configuration
   admin_api:
@@ -625,6 +623,20 @@ rpk:
   # Default: ''
   coredump_dir: "/var/lib/redpanda/coredump"
 
+  # Creates a "ballast" file so that, if a Redpanda node runs out of space,
+  # you can delete the ballast file to allow the node to resume operations and then
+  # delete a topic or records to reduce the space used by Redpanda.
+  # Default: false
+  tune_ballast_file: false
+
+  # The path where the ballast file will be created.
+  # Default: "/var/lib/redpanda/data/ballast"
+  ballast_file_path: "/var/lib/redpanda/data/ballast"
+
+  # The ballast file size.
+  # Default: "1GiB"
+  ballast_file_size: "1GiB"
+
   # (Optional) The vendor, VM type and storage device type that redpanda will run on, in
   # the format <vendor>:<vm>:<storage>. This hints to rpk which configuration values it
   # should use for the redpanda IO scheduler.
@@ -678,7 +690,9 @@ Here is a more comprehensive view of the configration so that you can see all of
 | `dashboard_dir` | serve http dashboard on / url | None |
 | `default_num_windows` | Default number of quota tracking windows | 10 |
 | `default_topic_partitions` | Default number of partitions per topic | 1 |
-| `default_topic_replication` | Default replication factor for new topics | 1 |
+| `default_topic_replications` | Default replication factor for new topics | 1 (In v21.8.1 and higher, the default is 3 for Kubernetes clusters with at least 3 nodes) |
+| `transaction_coordinator_replication` | Replication factor for a transaction coordinator topic | 1 (In v21.8.1 and higher, the default is 3 for Kubernetes clusters with at least 3 nodes) |
+| `id_allocator_replication` | Replication factor for an ID allocator topic | 1 (In v21.8.1 and higher, the default is 3 for Kubernetes clusters with at least 3 nodes) |
 | `default_window_sec` | Default quota tracking window size in milliseconds | 1000ms |
 | `delete_retention_ms` | delete segments older than this (default 1 week) | 10080min |
 | `developer_mode` | Skips most of the checks performed at startup | Optional |
@@ -722,11 +736,9 @@ Here is a more comprehensive view of the configration so that you can see all of
 | `log_segment_size` | How large in bytes should each log segment be (default 1G) | 1GB |
 | `max_compacted_log_segment_size` | Max compacted segment size after consolidation | 5GB |
 | `max_kafka_throttle_delay_ms` | Fail-safe maximum throttle delay on kafka requests | 60000ms |
-| `max_version` | max redpanda compat version | 1 |
 | `metadata_dissemination_interval_ms` | Interaval for metadata dissemination batching | 3000ms |
 | `metadata_dissemination_retries` | Number of attempts of looking up a topic's meta data like shard before failing a request | 10 |
-| `metadata_dissemination_retry_delay_ms` | Delay before retry a topic lookup in a shard or other meta tables | 100ms |
-| `min_version` | minimum redpanda compat version | 0 |
+| `metadata_dissemination_retry_delay_ms` | Delay before retry a topic lookup in a shard or other meta tables | 500ms |
 | `pandaproxy_api` | Rest API listen address and port | 0.0.0.0:8082 |
 | `pandaproxy_api_tls` | TLS configuration for Pandaproxy api | validate_many |
 | `quota_manager_gc_sec` | Quota manager GC frequency in milliseconds | 30000ms |
@@ -751,14 +763,11 @@ Here is a more comprehensive view of the configration so that you can see all of
 | `rm_violation_recovery_policy` | Describes how to recover from an invariant violation happened on the partition level | crash |
 | `rpc_server` | IP address and port for RPC server | 127.0.0.1:33145 |
 | `rpc_server_tls` | TLS configuration for RPC server | validate |
-| `seed_server_meta_topic_partitions` | Number of partitions in internal raft metadata topic | 7 |
 | `seed_servers` | List of the seed servers used to join current cluster; If the seed_server list is empty the node will be a cluster root and it will form a new cluster | None |
 | `segment_appender_flush_timeout_ms` | Maximum delay until buffered data is written | 1sms |
-| `stm_snapshot_recovery_policy` | Describes how to recover from an invariant violation happened during reading a stm snapshot | crash |
 | `superusers` | List of superuser usernames | None |
 | `target_quota_byte_rate` | Target quota byte rate in bytes per second | 2GB |
 | `tm_sync_timeout_ms` | Time to wait state catch up before rejecting a request | 2000ms |
 | `tm_violation_recovery_policy` | Describes how to recover from an invariant violation happened on the transaction coordinator level | crash |
 | `transactional_id_expiration_ms` | Producer ids are expired once this time has elapsed after the last write with the given producer ID | 10080min |
-| `use_scheduling_groups` | Manage CPU scheduling | false |
 | `wait_for_leader_timeout_ms` | Timeout (ms) to wait for leadership in metadata cache | 5000ms |

@@ -11,7 +11,7 @@ module.exports = {
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'vectorizedio', // Usually your GitHub org/user name.
-  projectName: 'redpanda', // Usually your repo name.
+  projectName: 'redpanda', // Usually your repo name.,
   themeConfig: {
     navbar: {
       title: '',
@@ -23,9 +23,12 @@ module.exports = {
       },
       items: [
         // Left
-        { href: '/', label: 'Docs', position: 'left' },
-        { href: '/docs/getting-started/index', label: 'Quick Start', position: 'left' },
-        // { href: 'https://vectorized.io/blog', label: 'Blog', position: 'left' },
+        { href: 'https://vectorized.io/redpanda', label: 'Redpanda', position: 'right' },
+        { href: 'https://vectorized.io/cloud', label: 'Cloud', position: 'right' },
+        { href: '/docs/getting-started/index', label: 'Quick Start', position: 'right' },
+        { href: 'https://vectorized.io/team', label: 'Team', position: 'right' },
+        { href: '/', label: 'Career', position: 'right' },        
+        { href: 'https://vectorized.io/blog', label: 'Blog', position: 'right' },
         // Right
         { 
           href: 'https://join.slack.com/t/vectorizedcommunity/shared_invite/zt-ng2ze1uv-l5VMWSGQHB9gp47~kNnYGA', 

@@ -1,4 +1,6 @@
 {
   "label": "Getting started",
-  "position": 3
+  "position": 0,
+  "collapsible": false,
+  "collapsed": true
 }

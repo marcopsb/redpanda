@@ -1,6 +1,8 @@
 ---
+title: Data archiving
+order: 0
+sidebar_position: 3
 ---
-
 
 # Data archiving
 
@@ -64,7 +66,7 @@ We recommend that you keep topic manifests in order to recover the corresponding
         - (Optional) Specify expiration rules for the files that are based on the `rp-type` file tags.
         - Use the IAM service to create a user to access S3.
             - Grant this user permission to read and create objects.
-            - Copy the access key and secret key to the Redpanda configuration options `cloud_storage_s3_access_key` and `cloud_storage_s3_secret_key`, respectively.
+            - Copy the access key and secret key to the Redpanda configuration options `cloud_storage_access_key` and `cloud_storage_secret_key`, respectively.
 
     - Google Cloud Storage
         - Choose a uniform access control when you create the bucket.
@@ -72,7 +74,7 @@ We recommend that you keep topic manifests in order to recover the corresponding
             - Use a Google managed encryption key.
             - Set a [default project](https://cloud.google.com/storage/docs/migrating#defaultproj).
         - [Create a service user with HMAC keys](https://cloud.google.com/storage/docs/authentication/managing-hmackeys)
-            and copy the keys to the Redpanda configuration options `cloud_storage_s3_access_key` and `cloud_storage_s3_secret_key`, respectively. 
+            and copy the keys to the Redpanda configuration options `cloud_storage_access_key` and `cloud_storage_secret_key`, respectively. 
         - Set `cloud_storage_api_endpoint` to `storage.googleapis.com`
     - MinIO (for local testing)
         - Use the `MINIO_ROOT_PASSWORD` and `MINIO_ROOT_USER` environment variables for the access key (`cloud_storage_access_key`) and secret key (`cloud_storage_secret_key`), respectively.
@@ -103,3 +105,4 @@ We recommend that you keep topic manifests in order to recover the corresponding
     |-----------------------------------------------|--------------|---------------------------------------------------------|
     | `cloud_storage_reconciliation_interval_ms`    | milliseconds | Reconciliation period (Default: 10s)                   |
     | `cloud_storage_max_connections`               | integer      | Number of simultaneous uploads per shard (Default: 20) |
+    

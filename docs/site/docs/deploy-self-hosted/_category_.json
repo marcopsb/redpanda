@@ -1,4 +1,6 @@
 {
-  "label": "Deploying self-hosted Redpanda",
-  "position": 5
+  "label": "Deployment",
+  "position": 2,
+  "collapsible": false,
+  "collapsed": true
 }

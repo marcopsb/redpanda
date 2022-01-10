@@ -1,10 +1,11 @@
 ---
-sidebar_position: 3
+title: Linux
+order: 0
+sidebar_position: 5
 ---
-
 # Linux Quick Start Guide
 
-Redpanda is a modern [streaming platform](https://vectorized.io/blog/intelligent-data-api/) for mission critical workloads.
+Redpanda is a modern [streaming platform](/blog/intelligent-data-api/) for mission critical workloads.
 With Redpanda you can get up and running with streaming quickly
 and be fully compatible with the [Kafka ecosystem](https://cwiki.apache.org/confluence/display/KAFKA/Ecosystem).
 
@@ -90,7 +91,7 @@ You've just installed Redpanda and done streaming in a few easy steps.
 
 ## What's Next?
 
-- Our [FAQ](/docs/faq) page shows all of the clients that you can use to do streaming with Redpanda.
+- Our [FAQ](/docs/reference/faq) page shows all of the clients that you can use to do streaming with Redpanda.
      (Spoiler: Any Kafka-compatible client!)
 - Get a multi-node cluster up and running using [`rpk container`](/docs/deploy-self-hosted/guide-rpk-container).
 - Use the [Quick Start Docker Guide](/docs/getting-started/quick-start-docker) to try out Redpanda using Docker.

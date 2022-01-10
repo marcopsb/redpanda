@@ -1,6 +1,8 @@
 ---
+title: Using Terraform and Ansible to deploy Redpanda
+order: 0
+sidebar_position: 6
 ---
-
 
 # Using Terraform and Ansible to deploy Redpanda
 
@@ -23,8 +25,8 @@ Then change into the directory:
 cd deployment-automation
 ```
 
-From here, follow the specific instructions for [AWS](#AWS) or
-[GCP](#GCP).
+From here, follow the specific instructions for [AWS](#aws) or
+[GCP](#gcp).
 
 ### AWS
 

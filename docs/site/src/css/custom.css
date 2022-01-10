@@ -66,6 +66,38 @@ html[data-theme='dark'] {
   padding: 0 var(--ifm-pre-padding);
 }
 
+.table-of-contents__link, .menu__link {
+  font-weight: 100 !important;
+  font-size: 14px;
+  letter-spacing: .025rem;
+}
+
+.theme-edit-this-page {
+  display: none;
+}
+
+.navbar {
+  height: 86px;
+  padding-left: 110px;
+  padding-right: 110px;
+  padding-top: 22px;
+  padding-bottom: 22px;
+  background-color: hsla(21, 17%, 97%, 1.0) !important;
+}
+
+.navbar__inner {
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat-x: initial;
+  background-repeat-y: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: hsla(21, 17%, 97%, 1.0) !important;
+}
+
 html[data-theme='dark'] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
 }
